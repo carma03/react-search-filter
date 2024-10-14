@@ -7,11 +7,17 @@
 const ItemsList = ({items}) => {
     return (
       <>
-        {/* replace filteredUsers with items*/}
+        {/* replace filteredProducts with items*/}
         {items.length === 0
-          ? <p>No users found</p>
+          ? <p>No products found</p>
           : <ul>
-            {items.map(item => <li key={item.id}>{item.firstName}</li>)}
+            {
+              items.map(
+                item => <li key={item.id} data-id={item.id} data-category={item.category}>
+                          {item.title}
+                        </li>
+              )
+            }
           </ul>
         }
       </>

@@ -6,30 +6,30 @@ import { useState, useEffect } from 'react'
 import Input from './components/Input.jsx'
 import ItemList from './components/ItemsList.jsx'
 // import our new hook
-import { useGetUsers } from './hooks/useGetUsers.jsx'
+import { useGetAllProducts } from './hooks/useGetAllProducts.jsx'
 
 function App() {
-  // use our custom hook to get our users and 
+  // use our custom hook to get our products and 
   // the error and loading variables
-  const {users, loading, error} = useGetUsers()
-  const [filteredUsers, setFilteredUsers] = useState([])
+  const {products, loading, error} = useGetAllProducts()
+  const [filteredProducts, setFilteredProducts] = useState([])
 
   useEffect(() => {
-    // check if the users are not empty, if so then the 
+    // check if the products are not empty, if so then the 
     // API call was successful and we can update our 
-    // filteredUsers state
-    if (Object.keys(users).length > 0) {
-      setFilteredUsers(users)
+    // filteredProducts state
+    if (Object.keys(products).length > 0) {
+      setFilteredProducts(products)
     }
-  }, [users]) // this effect should run when the users state gets updated
+  }, [products]) // this effect should run when the products state gets updated
 
   const filterItems = (searchTerm) => { 
-    // we now use 'users' instead of 'apiUsers' to do the filtering
-    const filteredItems = users.filter((user) =>
-      user.firstName.toLowerCase().includes(searchTerm.toLowerCase())
+    // we now use 'products' instead of 'apiUsers' to do the filtering
+    const filteredItems = products.filter((user) =>
+      user.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    setFilteredUsers(filteredItems);
+    setFilteredProducts(filteredItems);
   }
 
   return (
@@ -37,8 +37,8 @@ function App() {
       {/* Use the new Input component instead of the input tag */}
       <Input onChangeCallback={filterItems} />
       {loading && <p>Loading...</p>}
-      {error && <p>There was an error loading the users</p>}
-      {!loading && !error && <ItemList items={filteredUsers} />}
+      {error && <p>There was an error loading the products</p>}
+      {!loading && !error && <ItemList items={filteredProducts} />}
     </>
   )
 }
