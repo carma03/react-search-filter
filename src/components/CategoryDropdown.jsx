@@ -5,7 +5,7 @@
 import { useState } from "react";
 import { useId } from 'react';
 
-function capitalizeOption(value) {
+const capitalizeOption = (value) => {
   return value.length < 1 ? '' : value[0].toUpperCase() + value.slice(1);
 }
 
